@@ -2,10 +2,9 @@ module WebDriver
 
 using PyCall
 
-import Base: size, close, quit, parent, get
+import Base: size, close, parent, get
 
 include("defs.jl")
 include("generated.jl")
-include("lib.jl")
 
 end # module

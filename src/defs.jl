@@ -1,18 +1,18 @@
 using PyCall
 
-@pyimport selenium.webdriver as wd
+wd = pyimport("selenium.webdriver")
 
-immutable Driver
+struct Driver
     o::PyObject
 end
 PyObject(x::Driver) = x.o
 
 for attr in [:session_id, :capabilities, :command_executor, :error_handler]
-    @eval $attr(w::Driver) = w.o[:$attr]
+    @eval $attr(w::Driver) = w.o["$attr"]
 end
 
 
-immutable WebElement
+struct WebElement
     o::PyObject
 end
 PyObject(x::WebElement) = x.o
@@ -26,7 +26,7 @@ init_chrome(args...) = Driver(wd.Chrome(args...))
 init_ie(args...) = Driver(wd.Ie(args...))
 
 
-immutable ActionChain
+struct ActionChain
     o::PyObject
 end
 
